@@ -1,0 +1,136 @@
+:root {
+	--accent: #4b6efc;
+	--text: #111;
+	--low: #ffffff;
+	--high: #f7f7f7;
+
+	height: 100%;
+
+	font-family: "Inter", sans-serif;
+	color: var(--text);
+	background-color: var(--low);
+}
+
+:root.dark {
+	--text: #fff;
+	--low: #222;
+	--high: #333;
+}
+
+body {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+
+	align-items: stretch;
+}
+
+main {
+	padding: 25px;
+
+	background-color: var(--high);
+	overflow: scroll;
+}
+
+section {
+	display: flex;
+	padding: 50px;
+
+	align-items: center;
+	justify-content: center;
+	flex-grow: 1;
+}
+
+nav {
+	display: flex;
+
+	position: fixed;
+	right: 25px;
+	bottom: 25px;
+	z-index: 20;
+
+	gap: 25px;
+}
+
+@media screen and (min-width: 800px) {
+	main {
+		width: 350px;
+	}
+
+	main ~ #toggle {
+		display: none;
+	}
+
+	canvas {
+		height: min(calc(100vh - 100px), calc(1.4286 * calc(100vw - 500px)));
+		width: min(calc(100vw - 500px), calc(0.7 * calc(100vh - 100px)));
+	}
+}
+
+@media screen and (max-width: 800px) {
+	body {
+		flex-direction: column;
+	}
+
+	main {
+		width: calc(100vw - 50px);
+		height: calc(100vh - 50px);
+
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		z-index: 10;
+
+		transform: translateX(0vw);
+
+		transition: all 500ms ease;
+	}
+
+	main.closed {
+		overflow: visible;
+
+		transform: translateX(-100vw);
+	}
+
+	main ~ #toggle {
+		display: flex;
+		padding: 10px 0px;
+		margin: 0px;
+
+		position: fixed;
+		top: 50%;
+		right: 0px;
+		z-index: 20;
+
+		align-items: center;
+		justify-content: center;
+
+		background: var(--high);
+		border: none;
+		border-radius: 0px 5px 5px 0px;
+		cursor: pointer;
+		transform: translate(0px, -26px);
+
+		transition: all 500ms ease;
+	}
+
+	main ~ #toggle > svg {
+		transform: rotate(0deg);
+
+		transition: all 500ms ease;
+	}
+
+	main.closed ~ #toggle {
+		transform: translate(calc(100% - 100vw), -26px);
+	}
+
+	main.closed ~ #toggle > svg {
+		transform: rotate(180deg);
+	}
+
+	canvas {
+		height: min(calc(100vh - 100px), calc(1.4286 * calc(100vw - 100px)));
+		width: min(calc(100vw - 100px), calc(0.7 * calc(100vh - 100px)));
+	}
+}
