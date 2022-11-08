@@ -33,6 +33,23 @@ main {
 	overflow: scroll;
 }
 
+main div {
+	display: flex;
+	width: 100%;
+	margin-bottom: 10px;
+
+	gap: 10px;
+	align-items: center;
+}
+
+main div > * {
+	width: 100%;
+	margin: 0px;
+
+	flex-basis: 0px;
+	flex-grow: 1;
+}
+
 section {
 	display: flex;
 	padding: 50px;
@@ -74,8 +91,9 @@ nav {
 	}
 
 	main {
-		width: calc(100vw - 50px);
+		width: calc(100vw - max(calc(100vw - 400px), 70px));
 		height: calc(100vh - 50px);
+		padding: 25px max(calc(50vw - 200px), 35px);
 
 		position: fixed;
 		top: 0px;
@@ -116,6 +134,7 @@ nav {
 	}
 
 	main ~ #toggle > svg {
+		fill: var(--text);
 		transform: rotate(0deg);
 
 		transition: all 500ms ease;
