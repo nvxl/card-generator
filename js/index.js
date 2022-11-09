@@ -27,3 +27,25 @@ const updateBySeason = () => {
 document.getElementById("i-season")
 	.addEventListener("input", updateBySeason);
 updateBySeason();
+
+const update = () => {
+	const canvas = document.getElementById("canvas");
+	const ctx = canvas.getContext("2d");
+
+	const props = Object.fromEntries(
+		Array.from(document.getElementsByTagName("main")[0].children)
+			.filter((element) => !!element.value) // am lazy
+			.map((element) => [
+				element.id.replace("id-", ""),
+				element.getAttribute("type") == "file"
+					? element.files[0]
+					: element.value,
+			])
+	);
+
+	[draw1, draw2][props.season == "1" ? 0 : 1](ctx, props);
+};
+
+for (const element of document.getElementsByTagName("main")[0].children)
+	if (["input", "select"].includes(element.tagName.toLowerCase()))
+		element.addEventListener("input", () => update());
