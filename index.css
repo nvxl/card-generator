@@ -88,6 +88,10 @@ main input[type=file]::file-selector-button:hover {
 	color: var(--accent);
 }
 
+.disabled {
+	opacity: 0.5;
+}
+
 section {
 	display: flex;
 	padding: 50px;

@@ -11,3 +11,19 @@ document.getElementById("toggle-theme")
 
 if ((localStorage.getItem("dark") || "false") == "true")
 	document.documentElement.classList.add("dark");
+
+const updateBySeason = () => {
+	const season = document.getElementById("i-season").value;
+
+	const disable = season == "1" ? "only-s2" : "only-s1";
+	const enable = season == "1" ? "only-s1" : "only-s2";
+
+	for (const element of document.getElementsByClassName(disable))
+		element.classList.add("disabled");
+	for (const element of document.getElementsByClassName(enable))
+		element.classList.remove("disabled");
+};
+
+document.getElementById("i-season")
+	.addEventListener("input", updateBySeason);
+updateBySeason();
