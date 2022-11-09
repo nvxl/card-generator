@@ -27,27 +27,61 @@ body {
 }
 
 main {
+	display: grid;
 	padding: 25px;
+
+	align-items: center;
+	gap: 20px;
+	grid-template-columns: auto 1fr;
+	grid-auto-rows: min-content;
 
 	background-color: var(--high);
 	overflow: scroll;
 }
 
-main div {
-	display: flex;
-	width: 100%;
-	margin-bottom: 10px;
-
-	gap: 10px;
-	align-items: center;
+main > label {
+	text-align: right;
 }
 
-main div > * {
-	width: 100%;
+main input:not([type=file]), main select {
+	padding: 4px;
 	margin: 0px;
 
-	flex-basis: 0px;
-	flex-grow: 1;
+	background: none;
+	border: 1px solid var(--text);
+	border-radius: 4px;
+	color: var(--text);
+	font-family: "Inter", sans-serif;
+	outline: none;
+
+	transition: all 250ms ease;
+}
+
+main input:not([type=file]):focus {
+	border-color: var(--accent);
+	color: var(--accent);
+}
+
+main select {
+	cursor: pointer;
+}
+
+main input[type=file]::file-selector-button {
+  padding: 4px;
+
+  background: none;
+  border: 1px solid var(--text);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
+
+	transition: all 250ms ease;
+}
+
+main input[type=file]::file-selector-button:hover {
+	border-color: var(--accent);
+	color: var(--accent);
 }
 
 section {
