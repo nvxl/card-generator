@@ -97,6 +97,25 @@ section {
 	flex-grow: 1;
 }
 
+nav svg {
+	fill: var(--text);
+	transition: all 250ms ease;
+}
+
+nav > button, nav > a {
+	padding: 0px;
+	margin: 0px;
+
+	appearance: none;
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+nav > button:hover > svg, nav > a:hover > svg {
+	fill: var(--accent);
+}
+
 @media screen and (min-width: 800px) {
 	main {
 		width: 350px;
@@ -123,7 +142,7 @@ section {
 		bottom: 25px;
 		z-index: 20;
 
-		gap: 25px;
+		gap: 10px;
 	}
 }
 
@@ -190,7 +209,7 @@ section {
 	}
 
 	#scroll-padding {
-		height: 100px;
+		height: 75px;
 	}
 
 	canvas {
