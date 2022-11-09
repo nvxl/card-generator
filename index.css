@@ -57,6 +57,10 @@ main input:not([type=file]), main select {
 	transition: all 250ms ease;
 }
 
+main input:not([type=file]) {
+	padding: 4px 8px;
+}
+
 main input:not([type=file]):focus {
 	border-color: var(--accent);
 	color: var(--accent);
@@ -67,7 +71,7 @@ main select {
 }
 
 main input[type=file]::file-selector-button {
-  padding: 4px;
+  padding: 4px 8px;
 
   background: none;
   border: 1px solid var(--text);
@@ -93,17 +97,6 @@ section {
 	flex-grow: 1;
 }
 
-nav {
-	display: flex;
-
-	position: fixed;
-	right: 25px;
-	bottom: 25px;
-	z-index: 20;
-
-	gap: 25px;
-}
-
 @media screen and (min-width: 800px) {
 	main {
 		width: 350px;
@@ -113,9 +106,24 @@ nav {
 		display: none;
 	}
 
+	#scroll-padding {
+		height: 0px;
+	}
+
 	canvas {
 		height: min(calc(100vh - 100px), calc(1.4286 * calc(100vw - 500px)));
 		width: min(calc(100vw - 500px), calc(0.7 * calc(100vh - 100px)));
+	}
+
+	nav {
+		display: flex;
+
+		position: fixed;
+		right: 25px;
+		bottom: 25px;
+		z-index: 20;
+
+		gap: 25px;
 	}
 }
 
@@ -125,9 +133,13 @@ nav {
 	}
 
 	main {
-		width: calc(100vw - max(calc(100vw - 400px), 70px));
+		--container: calc(100vw - 35px);
+		--width: min(calc(var(--container) - 50px), 350px);
+		--padding: calc(calc(var(--container) - var(--width)) / 2);
+
+		width: var(--width);
 		height: calc(100vh - 50px);
-		padding: 25px max(calc(50vw - 200px), 35px);
+		padding: 25px calc(var(--padding) + 35px) 25px var(--padding);
 
 		position: fixed;
 		top: 0px;
@@ -140,8 +152,6 @@ nav {
 	}
 
 	main.closed {
-		overflow: visible;
-
 		transform: translateX(-100vw);
 	}
 
@@ -158,11 +168,11 @@ nav {
 		align-items: center;
 		justify-content: center;
 
-		background: var(--high);
+		background: var(--low);
 		border: none;
-		border-radius: 0px 5px 5px 0px;
+		border-radius: 5px 0px 0px 5px;
 		cursor: pointer;
-		transform: translate(0px, -26px);
+		transform: translate(0px, -26px) scaleX(100%);
 
 		transition: all 500ms ease;
 	}
@@ -175,15 +185,51 @@ nav {
 	}
 
 	main.closed ~ #toggle {
-		transform: translate(calc(100% - 100vw), -26px);
+		background: var(--high);
+		transform: translate(calc(100% - 100vw), -26px) scaleX(-100%);
 	}
 
-	main.closed ~ #toggle > svg {
-		transform: rotate(180deg);
+	#scroll-padding {
+		height: 100px;
 	}
 
 	canvas {
 		height: min(calc(100vh - 100px), calc(1.4286 * calc(100vw - 100px)));
 		width: min(calc(100vw - 100px), calc(0.7 * calc(100vh - 100px)));
+	}
+
+	nav {
+		display: flex;
+		width: calc(100vw - 50px);
+		padding: 25px;
+
+		position: fixed;
+		left: 0px;
+		bottom: 0px;
+		z-index: 20;
+
+		gap: 25px;
+		justify-content: flex-end;
+
+		background-color: var(--low);
+	}
+}
+
+@media screen and (max-width: 500px) {
+	main {
+		gap: 0px;
+		grid-template-columns: 1fr;
+	}
+
+	main label {
+		text-align: left;
+	}
+
+	main label:not(:first-child) {
+		margin-top: 20px;
+	}
+
+	main label {
+		margin-bottom: 5px;
 	}
 }
