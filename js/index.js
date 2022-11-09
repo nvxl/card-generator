@@ -36,7 +36,7 @@ const update = () => {
 		Array.from(document.getElementsByTagName("main")[0].children)
 			.filter((element) => !!element.value) // am lazy
 			.map((element) => [
-				element.id.replace("id-", ""),
+				element.id.replace("i-", ""),
 				element.getAttribute("type") == "file"
 					? element.files[0]
 					: element.value,
@@ -49,3 +49,4 @@ const update = () => {
 for (const element of document.getElementsByTagName("main")[0].children)
 	if (["input", "select"].includes(element.tagName.toLowerCase()))
 		element.addEventListener("input", () => update());
+update();
