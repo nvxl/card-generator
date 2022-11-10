@@ -1,7 +1,18 @@
 async function draw1(ctx, props) {
 	const { width, height } = ctx.canvas;
 
-	ctx.fillStyle = "#e5f6ed";
+	const ctColor = {
+		comm: "#7e7e7e",
+		uncomm: "#00aa4c",
+		rare: "#008ec1",
+		urare: "#ac00e6",
+		epic: "#db9e1c",
+		legend: "#ffd700",
+	}[props.category];
+
+	ctx.fillStyle = "#fff";
+	ctx.fillRect(0, 0, width, height);
+	ctx.fillStyle = ctColor + "1a";
 	ctx.fillRect(0, 0, width, height);
 
 	// flag
@@ -28,15 +39,6 @@ async function draw1(ctx, props) {
 	}
 
 	// category
-
-	const ctColor = {
-		comm: "#7e7e7e",
-		uncomm: "#00aa4c",
-		rare: "#008ec1",
-		urare: "#ac00e6",
-		epic: "#db9e1c",
-		legend: "#ffd700",
-	}[props.category];
 
 	const ctAngle = Math.tan(32 / width);
 	const ctHalfDiag = Math.sqrt(0.25 * width * width + 256);
