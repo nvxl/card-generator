@@ -47,8 +47,8 @@ const doUpdate = async () => {
 	updateQueued = false;
 	updateInProgress = true;
 
-	const canvas = document.getElementById("canvas");
-	const ctx = canvas.getContext("2d");
+	const backCanvas = document.getElementById("back-canvas");
+	const backCtx = backCanvas.getContext("2d");
 
 	const props = Object.fromEntries(
 		Array.from(document.getElementsByTagName("main")[0].children)
@@ -63,7 +63,16 @@ const doUpdate = async () => {
 			])
 	);
 
-	await [draw1, draw2][props.season == "1" ? 0 : 1](ctx, props);
+	await [draw1, draw2][props.season == "1" ? 0 : 1](backCtx, props);
+
+	const canvas = document.getElementById("canvas");
+	const ctx = canvas.getContext("2d");
+
+	const data = backCtx.getImageData(0, 0, backCanvas.width, backCanvas.height);
+
+	ctx.globalCompositeOperation = "copy";
+	ctx.putImageData(data, 0, 0);
+	ctx.globalCompositeOperation = "source-over";
 
 	updateInProgress = false;
 
