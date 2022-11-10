@@ -8,6 +8,18 @@ document.getElementById("toggle-theme")
 		localStorage.setItem("dark", (!dark).toString());
 		document.documentElement.classList[!dark ? "add" : "remove"]("dark");
 	});
+document.getElementById("download")
+	.addEventListener("click", () => {
+		const canvas = document.getElementById("canvas");
+
+		const a = document.createElement("a");
+		a.href = canvas.toDataURL();
+		a.download = "card.png";
+		document.body.appendChild(a);
+
+		a.click();
+		a.remove();
+	});
 
 if ((localStorage.getItem("dark") || "false") == "true")
 	document.documentElement.classList.add("dark");
