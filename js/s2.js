@@ -28,16 +28,7 @@ async function draw2(ctx, props) {
 	bgGradient.addColorStop(0, bg[0]);
 	bgGradient.addColorStop(1, bg[1]);
 
-	ctx.beginPath();
-	ctx.moveTo(6, 0);
-	ctx.lineTo(width - 6, 0);
-	ctx.arcTo(width, 0, width, 6, 6);
-	ctx.lineTo(width, height - 6);
-	ctx.arcTo(width, height, width - 6, height, 6);
-	ctx.lineTo(6, height);
-	ctx.arcTo(0, height, 0, height - 6, 6);
-	ctx.lineTo(0, 6);
-	ctx.arcTo(0, 0, 6, 0, 6);
+	roundRect(ctx, 0, 0, width, height, 6);
 
 	ctx.fillStyle = bgGradient;
 	ctx.fill();
