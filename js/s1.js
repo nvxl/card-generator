@@ -125,14 +125,14 @@ async function draw1(ctx, props) {
 	ctx.font = "400 22px sans-serif";
 	const dsLines = wrapText(ctx, props.desc || "Description", width - 88);
 
-	roundRect(ctx, 22, 464, width - 44, dsLines.length * 22 + 44, 4);
+	roundRect(ctx, 22, loMottoBaseline + 2, width - 44, dsLines.length * 22 + 44, 4);
 
 	ctx.fillStyle = "#fff";
 	ctx.fill();
 
 	ctx.fillStyle = "#666";
 
-	let dsBaseline = 506;
+	let dsBaseline = loMottoBaseline + 44;
 	for (const line of dsLines) {
 		ctx.fillText(line, 44, dsBaseline);
 
