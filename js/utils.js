@@ -14,7 +14,7 @@ function loadImage(file) {
 const iconCache = new Map();
 async function getIcon(name) {
 	if (!iconCache.has(name)) {
-		const res = await fetch(`/img/icons/${name}.png`);
+		const res = await fetch(`img/icons/${name}.png`);
 		iconCache.set(name, await loadImage(await res.blob()));
 	}
 
