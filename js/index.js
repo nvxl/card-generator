@@ -52,12 +52,14 @@ const doUpdate = async () => {
 
 	const props = Object.fromEntries(
 		Array.from(document.getElementsByTagName("main")[0].children)
-			.filter((element) => !!element.value) // am lazy
+			.filter((element) => ["input", "select"].includes(
+				element.tagName.toLowerCase()
+			))
 			.map((element) => [
 				element.id.replace("i-", ""),
 				element.getAttribute("type") == "file"
 					? element.files[0]
-					: element.value,
+					: element.value || "",
 			])
 	);
 
