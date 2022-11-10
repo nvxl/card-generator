@@ -101,6 +101,10 @@ section {
 	flex-grow: 1;
 }
 
+#back-canvas {
+	display: none;
+}
+
 nav svg {
 	fill: var(--text);
 	transition: all 250ms ease;
