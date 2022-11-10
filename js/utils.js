@@ -52,8 +52,9 @@ function wrapText(ctx, text, width) {
 	let line = "";
 
 	for (const word of words) {
-		if (ctx.measureText(line + " " + word).width <= width) {
-			line += " " + word;
+		const space = line.length == 0 ? "" : " ";
+		if (ctx.measureText(line + space + word).width <= width) {
+			line += space + word;
 		} else {
 			lines.push(line);
 			line = word;
