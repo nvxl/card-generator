@@ -28,7 +28,13 @@ document.getElementById("i-season")
 	.addEventListener("input", updateBySeason);
 updateBySeason();
 
-const update = () => {
+let updateQueued = false;
+let updateInProgress = false;
+
+const doUpdate = async () => {
+	updateQueued = false;
+	updateInProgress = true;
+
 	const canvas = document.getElementById("canvas");
 	const ctx = canvas.getContext("2d");
 
@@ -43,7 +49,16 @@ const update = () => {
 			])
 	);
 
-	[draw1, draw2][props.season == "1" ? 0 : 1](ctx, props);
+	await [draw1, draw2][props.season == "1" ? 0 : 1](ctx, props);
+
+	updateInProgress = false;
+
+	if (updateQueued) doUpdate();
+};
+
+const update = () => {
+	if (updateInProgress) updateQueued = true;
+	else doUpdate();
 };
 
 for (const element of document.getElementsByTagName("main")[0].children)
